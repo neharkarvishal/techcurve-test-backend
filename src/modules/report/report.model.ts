@@ -4,8 +4,14 @@ export const ReportCollectionName = 'Report' as const
 
 export interface ReportDocument extends Document {
     _id: string
-    status: string
-    description: string
+    summary: string
+    reporter: string
+    field?: {
+        fieldId?: string
+        nutrient?: string
+        percentage?: string
+        feedback?: string
+    }[]
 }
 
 export const ReportSchema = new Schema(
