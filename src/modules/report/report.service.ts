@@ -53,10 +53,10 @@ async function createReport({ fields }: { fields: any }) {
 }
 
 /** Update one record */
-async function updateReport({ id, fields }: { readonly id: string; fields: any }) {
+async function updateReport({ fields }: { fields: any }) {
     try {
-        const existing = await ReportModel.findOne({
-            _id: id,
+        const existing = await ReportModel.findOneAndUpdate({}, fields, {
+            new: true,
         }).exec()
 
         if (!existing) throw NotFound({ reportId: 'Report does not exist.' })

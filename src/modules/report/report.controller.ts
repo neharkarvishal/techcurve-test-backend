@@ -57,7 +57,7 @@ export function updateReportHandler(options): RequestHandler {
     return async (req, res, next) => {
         try {
             const { id } = req.params
-            const data = await updateReport({ id, fields: req.body })
+            const data = await updateReport({ fields: req.body })
 
             res.done({ data })
         } catch (e) {
@@ -78,12 +78,7 @@ function reportController(options: { db: typeof mongoose }) {
     router.post('/', validator(createReportSchema), createReportHandler(options))
 
     /** PUT */
-    router.put(
-        '/:id',
-        validObjectId(),
-        validator(updateReportSchema),
-        updateReportHandler(options),
-    )
+    router.put('/', validator(updateReportSchema), updateReportHandler(options))
 
     return router
 }
