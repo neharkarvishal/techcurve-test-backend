@@ -12,7 +12,9 @@ const projection = {
 /** Get all of the records */
 async function getReports(query: Record<string, any> = {}) {
     try {
-        return await ReportModel.findOne({}, projection).lean()
+        const data = await ReportModel.findOne({}, projection).lean()
+
+        return data || {}
     } catch (e) {
         return Promise.reject(e)
     }
